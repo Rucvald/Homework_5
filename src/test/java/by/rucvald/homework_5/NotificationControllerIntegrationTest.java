@@ -13,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post; // ✅ правильный импорт
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class NotificationControllerIntegrationTest {
 
-    @MockitoBean // ✅ заменяет бин в контексте
+    @MockitoBean
     private EmailService emailService;
 
     @Autowired
