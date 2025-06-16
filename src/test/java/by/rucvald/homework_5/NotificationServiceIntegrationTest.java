@@ -55,7 +55,7 @@ class NotificationServiceIntegrationTest {
     @Test
     void testCreateMessageTriggersEmail() throws Exception {
         String email = "test@example.com";
-        kafkaTemplate.send("test-topic", "create", email);
+        kafkaTemplate.send("test-topic", email, "create");
 
         verify(emailService, times(1)).sendEmail(email, "Account", "Account created");
     }
@@ -63,7 +63,7 @@ class NotificationServiceIntegrationTest {
     @Test
     void testDeleteMessageTriggersEmail() throws Exception {
         String email = "delete@example.com";
-        kafkaTemplate.send("test-topic", "delete", email);
+        kafkaTemplate.send("test-topic", email, "delete");
         Thread.sleep(1000);
 
         verify(emailService, times(1)).sendEmail(email, "Account", "Account deleted");
@@ -72,7 +72,7 @@ class NotificationServiceIntegrationTest {
     @Test
     void testUnknownKeyDoesNotTriggerEmail() throws Exception {
         String email = "unknown@example.com";
-        kafkaTemplate.send("test-topic", "update", email);
+        kafkaTemplate.send("test-topic", email, "update");
         Thread.sleep(1000);
 
         verify(emailService, never()).sendEmail(anyString(), anyString(), anyString());
